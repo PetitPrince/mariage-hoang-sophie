@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Save the date :)</title>
+    <title>Hoang et Sophie se marient</title>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap">
     <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
@@ -10,26 +11,418 @@
 
   </head>
 <style>
+    .bg-img{
+        background: radial-gradient(circle, transparent 2%, rgba(0,0,0,0.4) 100%),
+                    url("images/banner.jpg") center center / cover no-repeat fixed
+    }
+    .title{
+      font-family:'Great vibes', cursive;
+      font-weight: 100;
+    }
+
+
+    .clearfix, .cal-container, .calendar {
+      zoom: 1;
+    }
+    .clearfix:before, .cal-container:before, .calendar:before, .clearfix:after, .cal-container:after, .calendar:after {
+      content: "\0020";
+      display: block;
+      height: 0;
+      overflow: hidden;
+    }
+    .clearfix:after, .cal-container:after, .calendar:after {
+      clear: both;
+    }
     
+    .cal-container {
+      margin: 0 auto;
+      width: 30em;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 100;
+      line-height: 1;
+      font-size: 20px;
+      color: #222;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    
+    .today {
+      background: #000;
+      color: white;
+      padding: 1em 0;
+      float: left;
+      width: 15em;
+      min-height: 17.2em;
+    }
+    .today .day-week {
+      color: rgba(255, 255, 255, 0.8);
+      margin: 1em 0 2em;
+    }
+    .today .day-num {
+      font-size: 8em;
+    }
+    
+    .calendar {
+      float: left;
+      width: 15em;
+      min-height: 17em;
+      background: #f5f5f5;
+      padding: 1.25em 1em 2em;
+    }
+    .calendar ul {
+      list-style-type: none;
+    }
+    .calendar .month {
+      color: #000;
+      font-weight: 100;
+      margin: 0.75em 0 1em;
+    }
+    .calendar .weekday {
+      color: #e42355;
+      font-weight: 100;
+      font-size: 0.8em;
+    }
+    .calendar .day {
+      font-size: 0.8em;
+      font-weight: 100;
+      color: #555555;
+    }
+    .calendar .weekday, .calendar .day {
+      float: left;
+      width: 12%;
+      margin: 0.25em 1%;
+      line-height: 1.5em;
+      vertical-align: middle;
+    }
+    .calendar .weekday.now, .calendar .day.now {
+      position: relative;
+      color: #e42355;
+    }
+    .calendar .weekday.now:before, .calendar .day.now:before {
+      content: "";
+      width: 1.75em;
+      height: 1.75em;
+      border: 0.2em solid #e42355;
+      position: absolute;
+      border-radius: 100%;
+      left: 0.1em;
+      top: -0.1em;
+    }
+    
+    .mute {
+      color: rgba(0, 0, 0, 0.25);
+    }
+    .mute2 {
+      color: rgba(0, 200, 0, 0.5);
+      }
+    @media (max-width: 38em){
+      .today{
+        float:none;
+      }
+    }
+    .map{
+      height: 50vh;
+      width: 50vw
+    }
+    @media (max-width: 768px){
+      .map{
+        width: 100vw
+      }
+    }
 </style>
 <body>
 
-<section class="hero is-fullheight has-background-dark">
 
-    <div class="hero-video">
-      <video poster="https://image.mux.com/iz0100yNEB3Dj5lyUwK4Li029N02hdIMizgZDKtvtOHCkfQ/thumbnail.png" playsinline autoplay muted>
-        <source src="https://stream.mux.com/iz0100yNEB3Dj5lyUwK4Li029N02hdIMizgZDKtvtOHCkfQ/high.mp4">
-      </video>
-    </div>
+<section class="hero is-success is-fullheight bg-img">
+  <div class="hero-head">
+    <nav class="navbar">
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href="#quand">
+              Quand ?
+            </a>
+            <a class="navbar-item" href="#ou">
+              Où ?
+            </a>
+            <a class="navbar-item" href="#autre">
+              Autre ?
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
 
-    <div class="hero-body">
-      <div class="container  has-text-centered">
-        <h1 class="title" style="font-size:4em">
-          <!-- Sophie & Hoang -->
-        </h1>        
+  <div class="hero-body">
+        <div class="container has-text-centered">
+        <h2 class="subtitle is-spaced heading">
+            Nous avons le plaisir de vous convier au mariage de
+        </h2>
+        <h1 class="title is-hidden-mobile" style="font-size: 6em">
+          Sophie & Hoang
+        </h1>
+        <h1 class="title is-hidden-tablet" style="font-size: 5em">
+          Sophie <br /> <span style="font-size: 0.5em">&</span> <br /> Hoang
+        </h1>
+
+        <h2 class="subtitle is-spaced heading">
+          Le <i class="far fa-calendar-plus"></i> 15 Mai 2021 au <i class="fas fa-map-marked-alt"></i> Domaine de la Crausaz
+        </h2>
+        <button type="button" class="button is-danger">Confirmer ou Infirmer ma présence avant le 28&nbsp; Février</button>
+        <!-- <button type="button" class="button has-text-white" style="background-color: transparent">Confirmer ma présence avant le 1<sup>er</sup>&nbsp; Février</button> -->
+      </div>
+
+  </div>
+
+  </section>
+  <section id="quand" class="columns is-vcentered" style="min-height:100vh; background: #eee">
+    <div class="column is-hidden-mobile" aria-hidden="true">
+      <div class="column is-centered">
+        <div class='cal-container'>
+          <div class='today'>
+            <div class='date'></div>
+            <div class='day-week'>Samedi</div><div class='day-num'>15</div>
+          </div>
+          <div class='calendar'>
+            <div class='month'>
+            Mai 2021
+            </div>
+            <ul class='weekdays'>
+              <li class='weekday'>L</li>
+              <li class='weekday'>M</li>
+              <li class='weekday'>M</li>
+              <li class='weekday'>J</li>
+              <li class='weekday'>V</li>
+              <li class='weekday'>S</li>
+              <li class='weekday'>S</li>
+            </ul>
+            <ul class='week'>
+              <li class='day'></li>
+              <li class='day'></li>
+              <li class='day'></li>
+              <li class='day'></li>
+              <li class='day'></li>
+              <li class='day'>
+                <span class='mute'>1</span>
+              </li>
+              <li class='day'>
+                <span class='mute'>2</span>
+              </li>
+              <li class='day'>3</li>
+              <li class='day'>4</li>
+              <li class='day'>5</li>
+              <li class='day'>6</li>
+              <li class='day'>7</li>
+              <li class='day'>
+                <span class='mute'>8</span>
+              </li>
+              <li class='day'>
+                <span class='mute'>9</span>
+              </li>
+              <li class='day'>10</li>
+              <li class='day'>11</li>
+              <li class='day'>12</li>
+              <li class='day'>
+                <span class='mute2'>13</span>
+              </li>
+              <li class='day'>
+                <span class='mute2'>14</span>
+              </li>
+              <li class='day now'>15</li>
+              <li class='day'>
+                <span class='mute'>16</span>
+              </li>
+              <li class='day'>17</li>
+              <li class='day'>18</li>
+              <li class='day'>19</li>
+              <li class='day'>20</li>
+              <li class='day'>21</li>
+              <li class='day'>
+                <span class='mute'>22</span>
+              </li>
+              <li class='day'>
+                <span class='mute'>23</span>
+              </li>
+              <li class='day'>
+                <span class='mute2'>24</span>
+              </li>
+              <li class='day'>25</li>
+              <li class='day'>26</li>
+              <li class='day'>27</li>
+              <li class='day'>28</li>
+              <li class='day'>
+                <span class='mute'>29</span>
+              </li>
+              <li class='day'>
+                <span class='mute'>30</span>
+              </li>
+              <li class='day'>31</li>
+            </ul>
+          </div>
+          
+      </div>
       </div>
     </div>
+    <div class="column container is-fluid">
+      <div class="content">
+        <h1 class="title" style="font-size:3em">Quand ?</h1>
+        <p>Le <strong>15 Mai 2021</strong>. C'est pendant le week-end de l'Ascension.</p>
+        <div>Nous célébrerons une cérémonie laïque à <strong>15h15</strong>, suivi d'un apéritif.</div>
+      </div>
+    </div>
+
+    <div class="column is-hidden-tablet" aria-hidden="true">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class='cal-container'>
+            <div class='today'>
+              <div class='date'></div>
+              <div class='day-week'>Samedi</div><div class='day-num'>15</div>
+            </div>
+
+            <div class='calendar'>
+              <div class='month'>
+              Mai 2021
+              </div>
+              <ul class='weekdays'>
+                <li class='weekday'>L</li>
+                <li class='weekday'>M</li>
+                <li class='weekday'>M</li>
+                <li class='weekday'>J</li>
+                <li class='weekday'>V</li>
+                <li class='weekday'>S</li>
+                <li class='weekday'>S</li>
+              </ul>
+              <ul class='week'>
+                <li class='day'></li>
+                <li class='day'></li>
+                <li class='day'></li>
+                <li class='day'></li>
+                <li class='day'></li>
+                <li class='day'>
+                  <span class='mute'>1</span>
+                </li>
+                <li class='day'>
+                  <span class='mute'>2</span>
+                </li>
+                <li class='day'>3</li>
+                <li class='day'>4</li>
+                <li class='day'>5</li>
+                <li class='day'>6</li>
+                <li class='day'>7</li>
+                <li class='day'>
+                  <span class='mute'>8</span>
+                </li>
+                <li class='day'>
+                  <span class='mute'>9</span>
+                </li>
+                <li class='day'>10</li>
+                <li class='day'>11</li>
+                <li class='day'>12</li>
+                <li class='day'>
+                  <span class='mute2'>13</span>
+                </li>
+                <li class='day'>
+                  <span class='mute2'>14</span>
+                </li>
+                <li class='day now'>15</li>
+                <li class='day'>
+                  <span class='mute'>16</span>
+                </li>
+                <li class='day'>17</li>
+                <li class='day'>18</li>
+                <li class='day'>19</li>
+                <li class='day'>20</li>
+                <li class='day'>21</li>
+                <li class='day'>
+                  <span class='mute'>22</span>
+                </li>
+                <li class='day'>
+                  <span class='mute'>23</span>
+                </li>
+                <li class='day'>
+                  <span class='mute2'>24</span>
+                </li>
+                <li class='day'>25</li>
+                <li class='day'>26</li>
+                <li class='day'>27</li>
+                <li class='day'>28</li>
+                <li class='day'>
+                  <span class='mute'>29</span>
+                </li>
+                <li class='day'>
+                  <span class='mute'>30</span>
+                </li>
+                <li class='day'>31</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <section id="ou" class="columns is-vcentered" style="min-height:100vh">
+    <div class="column container is-fluid">
+      <div class="content">
+        <h1 class="title" style="font-size:4em">Où ?</h1>
+        <div>
+          <p>
+            Nous avons réservé le <a href="https://www.lacrausaz.ch/">Domaine de la Crausaz</a> au cœur des coteaux du Lavaux. 
+            Croyez-nous, c'est un chouette endroit.</p>
+            <h2>Accès</h2>
+          <blockquote>
+            Chemin de la Creuse 9, CH-1091 Grandvaux
+          </blockquote>
+          <p><strong>En transport en commun</strong>: Arrêt Grandvaux du bus 381, ou Arrêt Villette du S2. Prevoyez un peu de marche en pente.</p>
+          <p><strong>En voiture</strong>: Avec l'accord de la commune, nous pouvons nous garez sur le chemin de la Creuse ainsi que la Grand'Rue de Grandvaux.</p>
+          <p><em>Pour nous rejoindre au dîner: veuillez-vous référer à votre invitation.</em></p>
+        </div>
+
+      </div>
+    </div>
+    <div class="column">
+      <!-- width="600" height="450" -->
+      <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1396.3535777714944!2d6.713595259771061!3d46.494005960985895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c28c8126a9f3f%3A0x51819cb17fa3f21f!2sChemin%20de%20la%20Creuse%209%2C%201091%20Grandvaux!5e0!3m2!1sen!2sch!4v1597498800704!5m2!1sen!2sch" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
   </section>
+
+
+  <section id="autre" class="section" style="background:#eee">
+    <h1 class="title has-text-centered" style="font-size:3em"> Quelques détails logistique...</h1>
+    <div class="columns">
+      <div class="column">
+        <h2 class="title"><i class="fas fa-camera-retro"></i> Photographies</h2>
+        <div>Nous avons recruté les services d'<a href="https://www.anouk-photo.com/">Anouk Ruffieux</a> pour assurer la couverture photographique de notre mariage. Les photos seront publiés sur cette même page une fois celle-ci traitées. Amis photographes, sentez-vous libre de prendre votre appareil, mais il n'y a aucune obligation.</div>
+      </div>
+      <div class="column">
+        <h2 class="title"><i class="fas fa-gifts"></i> Cadeaux</h2>
+        <div>Une cagnotte commune sera mise à disposition pour financer notre train de vie décadent. Déposez des mots gentils, ou sous, ou même les deux !</div>
+      </div>
+      <div class="column">
+        <h2 class="title" style="font-family: sans-serif; font-variant-caps:all-small-caps"><i class="fas fa-virus"></i>COVID</h2>
+        <div>Toutes ces informations peuvent changer suivant la situation sanitaire en Suisse en Mai.</div>
+      </div>  
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="content">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScm5AiEmmvIq-2JWlcOjqgZz3PBFUmzhmC_9yd8mO1RHtqK-A/viewform?embedded=true" height="1082" frameborder="0" marginheight="0" marginwidth="0" style="width:100%">Loading…</iframe>
+    </div>
+  </section>
+
+  <footer class="footer" style="background:#eee">
+    <div class="content has-text-centered">
+      <p>
+        C'est la fin de la page, bisous ❤️.
+      </p>
+      <p> <small> Créé avec les patounes de Hoang 🐲, l'œil avisé de Sophie 🦊, les ronrons de Pocari 🐈 , la course de Twix🐿️, et les ouaf-ouafs de Kahlua 🐕.</small></p>
+    </div>
+  </footer>
+
   </body>
 </html>
