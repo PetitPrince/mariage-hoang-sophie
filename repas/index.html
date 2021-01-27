@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Repas mariage Hoang et Sophie</title>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap">
+    <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+
+
+  </head>
+<style>
+    .bg-img{
+        background: radial-gradient(circle, transparent 2%, rgba(0,0,0,0.4) 100%),
+                    url("images/banner.jpg") center center / cover no-repeat fixed
+    }
+    .title{
+      font-family:'Great vibes', cursive;
+      font-weight: 100;
+    }
+
+
+    .clearfix, .cal-container, .calendar {
+      zoom: 1;
+    }
+    .clearfix:before, .cal-container:before, .calendar:before, .clearfix:after, .cal-container:after, .calendar:after {
+      content: "\0020";
+      display: block;
+      height: 0;
+      overflow: hidden;
+    }
+    .clearfix:after, .cal-container:after, .calendar:after {
+      clear: both;
+    }
+    
+    .cal-container {
+      margin: 0 auto;
+      width: 30em;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 100;
+      line-height: 1;
+      font-size: 20px;
+      color: #222;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    
+    .today {
+      background: #000;
+      color: white;
+      padding: 1em 0;
+      float: left;
+      width: 15em;
+      min-height: 17.2em;
+    }
+    .today .day-week {
+      color: rgba(255, 255, 255, 0.8);
+      margin: 1em 0 2em;
+    }
+    .today .day-num {
+      font-size: 8em;
+    }
+    
+    .calendar {
+      float: left;
+      width: 15em;
+      min-height: 17em;
+      background: #f5f5f5;
+      padding: 1.25em 1em 2em;
+    }
+    .calendar ul {
+      list-style-type: none;
+    }
+    .calendar .month {
+      color: #000;
+      font-weight: 100;
+      margin: 0.75em 0 1em;
+    }
+    .calendar .weekday {
+      color: #e42355;
+      font-weight: 100;
+      font-size: 0.8em;
+    }
+    .calendar .day {
+      font-size: 0.8em;
+      font-weight: 100;
+      color: #555555;
+    }
+    .calendar .weekday, .calendar .day {
+      float: left;
+      width: 12%;
+      margin: 0.25em 1%;
+      line-height: 1.5em;
+      vertical-align: middle;
+    }
+    .calendar .weekday.now, .calendar .day.now {
+      position: relative;
+      color: #e42355;
+    }
+    .calendar .weekday.now:before, .calendar .day.now:before {
+      content: "";
+      width: 1.75em;
+      height: 1.75em;
+      border: 0.2em solid #e42355;
+      position: absolute;
+      border-radius: 100%;
+      left: 0.1em;
+      top: -0.1em;
+    }
+    
+    .mute {
+      color: rgba(0, 0, 0, 0.25);
+    }
+    .mute2 {
+      color: rgba(0, 200, 0, 0.5);
+      }
+    @media (max-width: 38em){
+      .today{
+        float:none;
+      }
+    }
+    .map{
+      height: 50vh;
+      width: 50vw
+    }
+    @media (max-width: 768px){
+      .map{
+        width: 100vw
+      }
+    }
+</style>
+<body>
+
+    <section id="ou" class="columns is-vcentered" style="min-height:80vh">
+    <div class="column container is-fluid">
+      <div class="content">
+        <h1 class="title" style="font-size:4em">Dîner</h1>
+        <div>
+          <p>
+            Nous avons réservé l'<a href="https://www.lacrausaz.ch/">Auberge du Raisin</a>, 
+            situé à 20 minutes à pied du domaine de la Crausaz.</p>
+            <h2>Accès</h2>
+          <blockquote>
+            Place de l'Hôtel-de-Ville 1, 1096 Cully
+          </blockquote>
+          <p>Nous nous déplacerons tous ensemble à la fin de la cérémonie</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <!-- width="600" height="450" -->
+      <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.001295265474!2d6.7286981155920556!3d46.48828677912635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c28940ab753c1%3A0xc55eb5450abe7058!2sAuberge%20du%20Raisin!5e0!3m2!1sen!2sch!4v1611776718211!5m2!1sen!2sch" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+  </section>
+
+  <section class="section">
+  <a id="formulaire-reponse"></a>
+    <div class="content">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeraX2zgPVxRF-r3S5sxoh5tuAir1tYXoGINnuhwV7F6DvgWw/viewform?embedded=true" height="1082" frameborder="0" marginheight="0" marginwidth="0" style="width:100%">Loading…</iframe>
+    </div>
+  </section>
+
+  <footer class="footer" style="background:#eee">
+    <div class="content has-text-centered">
+      <p>
+        C'est la fin de la page, bisous ❤️.
+      </p>
+      <p> <small> Créé avec les patounes de Hoang 🐲, l'œil avisé de Sophie 🦊, les ronrons de Pocari 🐈 , la course de Twix🐿️, et les ouaf-ouafs de Kahlua 🐕.</small></p>
+    </div>
+  </footer>
+
+  </body>
+</html>
