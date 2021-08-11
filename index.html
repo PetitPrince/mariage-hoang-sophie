@@ -6,6 +6,7 @@
     <meta name = "viewport" content = "width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap">
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
     <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
 
 
@@ -129,7 +130,89 @@
         width: 100vw
       }
     }
-</style>
+
+
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css');
+
+    .item-slide {
+      box-sizing: border-box;
+    }
+    
+    /* The Modal (background) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      background-color: rgba(0,0,0,0);
+      width: 90%;
+      max-width: 1200px;
+      max-height: 700px;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .modal img {
+      height: 100vh;
+    }
+    
+    .item-slide{
+      display: none;
+    }
+    
+    /* Next & previous buttons */
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -50px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    
+    /* Position the "next button" to the right */
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    
+    
+    /* Number text (1/3 etc) */
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    
+    .item-slide img {
+      max-width: 1200px;
+    }
+    
+    
+    .gal .column img{
+      margin-top: 20px;
+    }
+  </style>
 <body>
 
 
@@ -166,11 +249,11 @@
         </h1>
 
         <h2 class="subtitle is-spaced heading">
-          Le <i class="far fa-calendar-plus"></i> <del>15 Mai 2021</del> <ins>18 Septembre</ins> au <i class="fas fa-map-marked-alt"></i> Domaine de la Crausaz
+          Le <i class="far fa-calendar-plus"></i> 18 Septembre au <i class="fas fa-map-marked-alt"></i> Domaine de la Crausaz
         </h2>
 
-          <div class="notification is-warning">La cérémonie laïque a été déplacée au <ins>18 Septembre</ins>.</div>
-          <a href="https://streaming.lettrypham.ch/"><button type="button" class="button is-info">Accéder au livestream</button></a>
+          <!-- <div class="notification is-warning">La cérémonie laïque a été déplacée au <ins>18 Septembre</ins>.</div>
+          <a href="https://streaming.lettrypham.ch/"><button type="button" class="button is-info">Accéder au livestream</button></a> -->
       </div>
 
     </div>
@@ -259,7 +342,7 @@
     <div class="column container is-fluid">
       <div class="content">
         <h1 class="title" style="font-size:3em">Quand ?</h1>
-        <p>Le <strong>15 Mai 2021</strong>. C'est le week-end du Jeûne fédéral.</p>
+        <p>Le <strong>18 Septembre 2021</strong>. C'est le week-end du Jeûne fédéral.</p>
         <div>Nous célébrerons une cérémonie laïque à <strong>15h15</strong>, suivi d'un apéritif.</div>
       </div>
     </div>
@@ -375,9 +458,25 @@
       <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1396.3535777714944!2d6.713595259771061!3d46.494005960985895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c28c8126a9f3f%3A0x51819cb17fa3f21f!2sChemin%20de%20la%20Creuse%209%2C%201091%20Grandvaux!5e0!3m2!1sen!2sch!4v1597498800704!5m2!1sen!2sch" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
   </section>
+<!-- 
+  <section style="background:#eee">
+    <div class="column container is-fluid">
+      <div class="content">
+        <h1 class="title" style="font-size:4em">Programme</h1>
+        <h2>15h00</h2>
+        <p>Cérémonie laïque, diverses animations.</p>
+        <h2>16h00</h2>
+        <p>Photo de groupe.</p>
+        <h2>16h30</h2>
+        <p>Apéritif.</p>
 
+      </div>
 
-  <section id="autre" class="section" style="background:#eee">
+      </div>
+    
+  </section>   -->
+
+  <section id="autre" class="section" style="background: #eee">
     <h1 class="title has-text-centered" style="font-size:3em"> Quelques détails logistique...</h1>
     <div class="columns">
       <div class="column">
@@ -385,15 +484,210 @@
         <div>Nous avons recruté les services d'<a href="https://www.anouk-photo.com/">Anouk Ruffieux</a> pour assurer la couverture photographique de notre mariage. Les photos seront publiés sur cette même page une fois celle-ci traitées. Amis photographes, prenez vos appareils si vous le voulez, mais il n'y a aucune obligation !</div>
       </div>
       <div class="column">
-        <h2 class="title"><i class="fas fa-gifts"></i> Cadeaux</h2>
-        <div>Une cagnotte commune sera mise à disposition pour financer notre train de vie décadent. Déposez des mots gentils, ou sous, ou même les deux !</div>
+        <h2 class="title"><i class="fas fa-user-tie"></i>Dress code</h2>
+        <div>Venez euh... bien habillés. Comme à un mariage, en fait. <em>Veuillez privilégier le blanc ivoire sur le blanc blanc</em>. </div>
       </div>
       <div class="column">
         <h2 class="title" style="font-family: sans-serif; font-variant-caps:all-small-caps"><i class="fas fa-virus"></i>COVID</h2>
-        <div>Toutes ces informations peuvent changer suivant la situation sanitaire en Suisse en Mai.</div>
+        <div>Toutes ces informations peuvent changer suivant la situation sanitaire en Suisse en Septembre.</div>
       </div>  
     </div>
   </section>
+  <section id="autre" class="section">
+    <h1 class="title has-text-centered" style="font-size:3em"> Liste de mariage</h1>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-three-fifths">      Nous ne pouvons malheureusement pas vous prendre avec nous dans nos bagages lors de notre lune de miel que nous espérons passer en Namibie. Nous vous proposons donc de faire partie du voyage en participant symboliquement à notre périple à la mesure qui vous conviendra et en indiquant ce que vous souhaitez offrir ^_^
+      </div>
+      <div class="column"></div>
+    </div>
+    
+    <div class="columns mx-6">
+      <div class="column">
+        <ul>
+          <li> <input type="checkbox" /> 100km en avion, direction l’Afrique</li>
+          <li> <input type="checkbox" /> Un repas d’aéroport (il y a des McDo partout…)</li>
+          <li> <input type="checkbox" /> Un pied d’éléphant farci aux olives</li>
+          <li> <input type="checkbox" /> Une armure de fraicheur +5 contre les insolations</li>
+          <li> <input type="checkbox" /> Une balade au bord de l’océan atlantique</li>
+          <li> <input type="checkbox" /> Une deuxième roue de secours pour le 4x4 du safari</li>
+          <li> <input type="checkbox" /> Un bain avec un hippopoopopootame</li>
+        </ul>
+      </div>
+      <div class="column">
+        <ul>
+          <li> <input type="checkbox" /> Une course contre un guépard</li>
+          <li> <input type="checkbox" /> Un lever de soleil dans le désert</li>
+          <li> <input type="checkbox" /> Une bataille de girafes</li>
+          <li> <input type="checkbox" /> Un cocktail dans un lodge 5*</li>
+          <li> <input type="checkbox" /> Un combo objectif photo-gourdin</li>
+          <li> <input type="checkbox" /> Un coup de soleil carabiné (et son aloe vera)</li>
+          <li> <input type="checkbox" /> Une soirée sous les étoiles</li>
+          <li> <input type="checkbox" /> Une partie de sand surfing dans les dunes</li>
+          <li> <input type="checkbox" /> Un safari dans une mongolfière</li>
+        </ul>
+
+      </div>
+      <div class="column">
+        <ul>
+          <li> <input type="checkbox" /> Une léchouille de lionceau</li>
+          <li> <input type="checkbox" /> Une charge de rhinocéros (ratée bien sûr)</li>
+          <li> <input type="checkbox" /> Un selfie flou</li>
+          <li> <input type="checkbox" /> Une nuit dans une tente sur le toit de la voiture</li>
+          <li> <input type="checkbox" /> Du sable dans le caleçon</li>
+          <li> <input type="checkbox" /> Une blague embarrassante sur la lune de miel</li>
+          <li> <input type="checkbox" /> Un nid d’éléphant sur la route</li>
+          <li> <input type="checkbox" /> Anti-moustique n°5 de Chanel</li>
+        </ul>
+      </div>  
+    </div>
+  </section>
+
+  <section class="section">
+    
+<section class="section gal" style="background:#eee">
+
+  <div class="container is-fluid">
+    <h1 class="title has-text-centered" style="font-size:3em">Des images</h1>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-three-fifths">Pour patienter, voici quelques photoss et vidéo de notre cérémonie civile. Cliquez pour aggrandir !
+      </div>
+      <div class="column"></div>
+    </div>
+
+    <div class="columns">
+          <div class="column">
+              <img src="images/photo/1s.jpg" onclick="openModal();currentSlide(1)">
+              <img src="images/photo/5s.jpg" onclick="openModal();currentSlide(5)">
+              <img src="images/photo/9s.jpg" onclick="openModal();currentSlide(9)">
+              <img src="images/photo/13s.jpg" onclick="openModal();currentSlide(13)">
+          </div>
+          <div class="column">
+              <img src="images/photo/2s.jpg" onclick="openModal();currentSlide(2)">
+              <img src="images/photo/6s.jpg" onclick="openModal();currentSlide(6)">
+              <img src="images/photo/10s.jpg" onclick="openModal();currentSlide(10)">
+              <img src="images/photo/14s.jpg" onclick="openModal();currentSlide(14)">
+          </div>
+          <div class="column">
+              <img src="images/photo/3s.jpg" onclick="openModal();currentSlide(3)">
+              <img src="images/photo/7s.jpg" onclick="openModal();currentSlide(7)">
+              <img src="images/photo/11s.jpg" onclick="openModal();currentSlide(11)">
+          </div>
+          <div class="column">
+            <img src="images/photo/4s.jpg" onclick="openModal();currentSlide(4)">
+            <img src="images/photo/8s.jpg" onclick="openModal();currentSlide(8)">
+            <img src="images/photo/12s.jpg" onclick="openModal();currentSlide(12)">
+        </div>
+    </div>
+
+      <div class="modal" id="myModal">
+          <div class="modal-content is-vcentered">
+            <div class="item-slide">
+              <img src="images/photo/1.jpg" onclick="openModal();currentSlide(1)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/2.jpg" onclick="openModal();currentSlide(2)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/3.jpg" onclick="openModal();currentSlide(3)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/4.jpg" onclick="openModal();currentSlide(4)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/5.jpg" onclick="openModal();currentSlide(5)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/6.jpg" onclick="openModal();currentSlide(6)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/7.jpg" onclick="openModal();currentSlide(7)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/8.jpg" onclick="openModal();currentSlide(8)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/9.jpg" onclick="openModal();currentSlide(9)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/10.jpg" onclick="openModal();currentSlide(10)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/11.jpg" onclick="openModal();currentSlide(11)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/12.jpg" onclick="openModal();currentSlide(12)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/13.jpg" onclick="openModal();currentSlide(13)">
+            </div>
+            <div class="item-slide">
+                <video
+                  id="my-video"
+                  class="video-js"
+                  controls
+                  preload="auto"
+                  width="800"
+                  height="600"
+                  poster="https://image.mux.com/Cgq00K029mjWlvrgntFxza01nd8q3M1frlvtEj00oNdEjww/thumbnail.png?width=1920&height=1080&fit_mode=pad"
+                  data-setup="{}"
+              >
+                <p class="vjs-no-js">
+                  Activez le javascript pour voir la vidéo.                  >
+                </p>
+              </video>
+              <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+          
+              </div>
+          </div>
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <button onclick="closeModal()" class="modal-close is-large" aria-label="close"></button>
+      </div>
+  </div>
+</section>
+  </section>
+  <script>
+    var options = {};
+    var player = videojs('my-video',options);
+player.src({
+  src: 'https://stream.mux.com/Cgq00K029mjWlvrgntFxza01nd8q3M1frlvtEj00oNdEjww.m3u8',
+  type: 'application/x-mpegURL'
+});
+
+    </script>
+  <script>
+    function openModal() {
+      document.getElementById('myModal').style.display = "block";
+    }
+    
+    function closeModal() {
+      document.getElementById('myModal').style.display = "none";
+    }
+    
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("item-slide");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      slides[slideIndex-1].style.display = "block";
+    }
+  </script>
 
   <!-- <section class="section">
   <a id="formulaire-reponse"></a>
@@ -402,12 +696,12 @@
     </div>
   </section> -->
 
-  <footer class="footer" style="background:#eee">
+  <footer class="footer">
     <div class="content has-text-centered">
       <p>
         C'est la fin de la page, bisous ❤️.
       </p>
-      <p> <small> Créé avec les patounes de Hoang 🐲, l'œil avisé de Sophie 🦊, les ronrons de Pocari 🐈 , la course de Twix🐿️, et les ouaf-ouafs de Kahlua 🐕.</small></p>
+      <p> <small> Créé avec les patounes de Hoang 🐲, l'œil avisé de Sophie 🦊, les ronrons de Pocari 🐈 , la course de Twix (RIP) et Yuzu 🐿️, et les ouaf-ouafs de Kahlua 🐕.</small></p>
     </div>
   </footer>
 
