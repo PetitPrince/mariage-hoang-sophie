@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Auberge du Raisin</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="multiple-scenes ">
+
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="0-accueil---porte">
+        <li class="text">Accueil - Porte</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="1-accueil---reception">
+        <li class="text">Accueil - Reception</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-accueil---entre-vestibule">
+        <li class="text">Accueil - Entrée Vestibule</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-vestibule---entre-rotisserie">
+        <li class="text">Vestibule - Entrée rotisserie</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-vestibule---entre-terrasse">
+        <li class="text">Vestibule - Entrée terrasse</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-vestibule---fenetre-rotisserie">
+        <li class="text">Vestibule - Fenetre rotisserie</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-vestibule---canape">
+        <li class="text">Vestibule - Canape</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-vestibule---mirroir">
+        <li class="text">Vestibule - mirroir</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-rotisserie---nord">
+        <li class="text">Rotisserie - Nord</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-rotisserie---milieu">
+        <li class="text">Rotisserie - Milieu</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-rotisserie---sud">
+        <li class="text">Rotisserie - Sud</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="11-terasse---entre-vestibule">
+        <li class="text">Terasse - Entrée vestibule</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="12-terasse---nord">
+        <li class="text">Terasse - Nord</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="13-terasse---milieu">
+        <li class="text">Terasse - Milieu</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="14-terasse---sud">
+        <li class="text">Terasse - Sud</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="15-escalier----1">
+        <li class="text">Escalier - -1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="16-escalier----2">
+        <li class="text">Escalier - -2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="17-crypte---entre-cave">
+        <li class="text">Crypte - Entrée cave</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="18-crypte---cave-est">
+        <li class="text">Crypte - Cave Est</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="19-crypte---cave-ouest">
+        <li class="text">Crypte - Cave Ouest</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="20-crypte---lounge-milieu">
+        <li class="text">Crypte - Lounge milieu</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="21-crypte---lounge-tableau">
+        <li class="text">Crypte - Lounge tableau</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="22-crypte---ascensceur-nord">
+        <li class="text">Crypte - Ascensceur Nord</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="23-crypte---ascensceur-sud">
+        <li class="text">Crypte - Ascensceur Sud</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="24-crypte---ascensceur-milieu">
+        <li class="text">Crypte - Ascensceur milieu</li>
+      </a>
+    
+  </ul>
+</div>
+
+<div id="titleBar">
+  <h1 class="sceneName"></h1>
+</div>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <img class="icon off" src="img/expand.png">
+  <img class="icon on" src="img/collapse.png">
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
