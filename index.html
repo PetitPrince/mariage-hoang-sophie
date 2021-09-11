@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap">
     <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
     <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
-
 
   </head>
 <style>
@@ -448,15 +453,16 @@
             Chemin de la Creuse 9, CH-1091 Grandvaux
           </blockquote>
           <p><strong>En transport en commun</strong>: Arrêt Grandvaux du bus 381, ou Arrêt Villette du S2. Prevoyez un peu de marche en pente.</p>
-          <p><strong>En voiture</strong>: Avec l'accord de la commune, nous pouvons nous garer sur le chemin de la Creuse ainsi que la Grand'Rue de Grandvaux.</p>
-          <p><em>Pour nous rejoindre au dîner: veuillez-vous référer à votre invitation.</em></p>
+          <p><strong>En voiture</strong>: des places de parcs sont généralement disponibles ici et là à Grandvaux. Si vous vous garez à Cully,  Un (très) chouette moyen de transport est organisé pour monter à la Crausaz à partir de Cully.  Rendez-vous à 14h00 (Église Catholique, Route de la Corniche 18, 1096 Cully). Un deuxième transport est organisé pour les retardataires à 14h30... mais ne soyez pas retardataire :-)</p>
         </div>
 
       </div>
     </div>
     <div class="column">
+
+      <div id="mapid" style="width:500px; height: 500px"></div>
       <!-- width="600" height="450" -->
-      <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1396.3535777714944!2d6.713595259771061!3d46.494005960985895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c28c8126a9f3f%3A0x51819cb17fa3f21f!2sChemin%20de%20la%20Creuse%209%2C%201091%20Grandvaux!5e0!3m2!1sen!2sch!4v1597498800704!5m2!1sen!2sch" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      <!-- <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1396.3535777714944!2d6.713595259771061!3d46.494005960985895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c28c8126a9f3f%3A0x51819cb17fa3f21f!2sChemin%20de%20la%20Creuse%209%2C%201091%20Grandvaux!5e0!3m2!1sen!2sch!4v1597498800704!5m2!1sen!2sch" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
     </div>
   </section>
 <!-- 
@@ -490,7 +496,7 @@
       </div>
       <div class="column">
         <h2 class="title" style="font-family: sans-serif; font-variant-caps:all-small-caps"><i class="fas fa-virus"></i>COVID</h2>
-        <div>Toutes ces informations peuvent changer suivant la situation sanitaire en Suisse en Septembre.</div>
+        <div>La cérémonie ayant lieu en extérieur, il ne devrait normalement pas avoir besoin de certificat. Nous vous aviserons en cas de changement. Nous vous recommandons cependant de faire un auto-test le jour même..</div>
       </div>  
     </div>
   </section>
@@ -816,6 +822,27 @@ player.src({
       <p> <small> Créé avec les patounes de Hoang 🐲, l'œil avisé de Sophie 🦊, les ronrons de Pocari 🐈 , la course de Twix (RIP) et Yuzu 🐿️, et les ouaf-ouafs de Kahlua 🐕.</small></p>
     </div>
   </footer>
+
+  <script type="text/javascript">
+    const map = L.map('mapid').setView([46.49404, 6.71419], 14);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 0,
+        maxZoom: 20,
+        attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    let crausaz = new L.marker([46.49404, 6.71419]);
+    let eglise = new L.marker([46.49072, 6.73035]);
+
+    const leafletMarkers = L.layerGroup([
+    crausaz,
+        eglise,
+    ]);
+    leafletMarkers.addTo(map);
+    crausaz.bindTooltip("<strong>Domaine de la Crausaz</strong><br />Chemin de la Creuse 9<br /> 1091 Grandvaux ").openTooltip();
+    eglise.bindTooltip("<strong>Lieu de rendez-vous pour monter</strong><br />Rte de la Corniche 18 (église catholique)<br /> 1096 Cully ").openTooltip();
+    
+  </script>
 
   </body>
 </html>
