@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoang et Sophie se marient</title>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap">
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+
+  </head>
+<style>
+    .bg-img{
+        background: radial-gradient(circle, transparent 2%, rgba(0,0,0,0.4) 100%),
+                    url("images/banner.jpg") center center / cover no-repeat fixed
+    }
+    .title{
+      font-family:'Great vibes', cursive;
+      font-weight: 100;
+    }
+
+
+    .clearfix, .cal-container, .calendar {
+      zoom: 1;
+    }
+    .clearfix:before, .cal-container:before, .calendar:before, .clearfix:after, .cal-container:after, .calendar:after {
+      content: "\0020";
+      display: block;
+      height: 0;
+      overflow: hidden;
+    }
+    .clearfix:after, .cal-container:after, .calendar:after {
+      clear: both;
+    }
+    
+    .cal-container {
+      margin: 0 auto;
+      width: 30em;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 100;
+      line-height: 1;
+      font-size: 20px;
+      color: #222;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    
+    .today {
+      background: #000;
+      color: white;
+      padding: 1em 0;
+      float: left;
+      width: 15em;
+      min-height: 17.2em;
+    }
+    .today .day-week {
+      color: rgba(255, 255, 255, 0.8);
+      margin: 1em 0 2em;
+    }
+    .today .day-num {
+      font-size: 8em;
+    }
+    
+    .calendar {
+      float: left;
+      width: 15em;
+      min-height: 17em;
+      background: #f5f5f5;
+      padding: 1.25em 1em 2em;
+    }
+    .calendar ul {
+      list-style-type: none;
+    }
+    .calendar .month {
+      color: #000;
+      font-weight: 100;
+      margin: 0.75em 0 1em;
+    }
+    .calendar .weekday {
+      color: #e42355;
+      font-weight: 100;
+      font-size: 0.8em;
+    }
+    .calendar .day {
+      font-size: 0.8em;
+      font-weight: 100;
+      color: #555555;
+    }
+    .calendar .weekday, .calendar .day {
+      float: left;
+      width: 12%;
+      margin: 0.25em 1%;
+      line-height: 1.5em;
+      vertical-align: middle;
+    }
+    .calendar .weekday.now, .calendar .day.now {
+      position: relative;
+      color: #e42355;
+    }
+    .calendar .weekday.now:before, .calendar .day.now:before {
+      content: "";
+      width: 1.75em;
+      height: 1.75em;
+      border: 0.2em solid #e42355;
+      position: absolute;
+      border-radius: 100%;
+      left: 0.1em;
+      top: -0.1em;
+    }
+    
+    .mute {
+      color: rgba(0, 0, 0, 0.25);
+    }
+    .mute2 {
+      color: rgba(0, 200, 0, 0.5);
+      }
+    @media (max-width: 38em){
+      .today{
+        float:none;
+      }
+    }
+    .map{
+      height: 50vh;
+      width: 50vw
+    }
+    @media (max-width: 768px){
+      .map{
+        width: 100vw
+      }
+    }
+
+
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css');
+
+    .item-slide {
+      box-sizing: border-box;
+    }
+    
+    /* The Modal (background) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      background-color: rgba(0,0,0,0);
+      width: 90%;
+      max-width: 1200px;
+      max-height: 700px;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .modal img {
+      height: 100vh;
+    }
+    
+    .item-slide{
+      display: none;
+    }
+    
+    /* Next & previous buttons */
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -50px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    
+    /* Position the "next button" to the right */
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    
+    
+    /* Number text (1/3 etc) */
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    
+    .item-slide img {
+      max-width: 1200px;
+    }
+    
+    
+    .gal .column img{
+      margin-top: 20px;
+    }
+  </style>
+<body>
+
+
+<section class="hero is-success is-fullheight bg-img">
+  <div class="hero-head">
+    <nav class="navbar">
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href="#quand">
+              Quand ?
+            </a>
+            <a class="navbar-item" href="#ou">
+              Où ?
+            </a>
+            <a class="navbar-item" href="#autre">
+              Autre ?
+            </a>
+            <a class="navbar-item" href="#photo"> Photos/Vidéos</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="hero-body">
+      <div class="container has-text-centered">
+        <h2 class="subtitle is-spaced heading">
+            Nous avons le plaisir de vous convier au mariage de
+        </h2>
+        <h1 class="title is-hidden-mobile" style="font-size: 6em">
+          Sophie & Hoang
+        </h1>
+        <h1 class="title is-hidden-tablet" style="font-size: 3em">
+          Sophie <br /> <span style="font-size: 0.5em">&</span> <br /> Hoang
+        </h1>
+
+        <h2 class="subtitle is-spaced heading">
+          Le <i class="far fa-calendar-plus"></i> 18 Septembre au <i class="fas fa-map-marked-alt"></i> Domaine de la Crausaz
+        </h2>
+
+          <!-- <div class="notification is-warning">La cérémonie laïque a été déplacée au <ins>18 Septembre</ins>.</div>
+          <a href="https://streaming.lettrypham.ch/"><button type="button" class="button is-info">Accéder au livestream</button></a> -->
+      </div>
+
+    </div>
+
+  </div>
+
+  </section>
+  <section id="quand" class="columns is-vcentered" style="min-height:100vh; background: #eee">
+    <div class="column is-hidden-mobile" aria-hidden="true">
+      <div class="column is-centered">
+        <div class='cal-container'>
+          <div class='today'>
+            <div class='date'></div>
+            <div class='day-week'>Samedi</div><div class='day-num'>18</div>
+          </div>
+          <div class='calendar'>
+            <div class='month'>
+            Septembre 2021
+            </div>
+            <ul class='weekdays'>
+              <li class='weekday'>L</li>
+              <li class='weekday'>M</li>
+              <li class='weekday'>M</li>
+              <li class='weekday'>J</li>
+              <li class='weekday'>V</li>
+              <li class='weekday'>S</li>
+              <li class='weekday'>S</li>
+            </ul>
+            <ul class='week'>
+              <li class='day'></li>
+              <li class='day'></li>
+              <li class='day'>1</li>
+              <li class='day'>2</li>
+              <li class='day'>3</li>
+              <li class='day'>
+                <span class='mute'>4</span>
+              </li>
+              <li class='day'>
+                <span class='mute'>5</span>
+              </li>
+              <li class='day'>6</li>
+              <li class='day'>7</li>
+              <li class='day'>8</li>
+              <li class='day'>9</li>
+              <li class='day'>10</li>
+              <li class='day'>
+                <span class='mute'>11</span>
+              </li>
+              <li class='day'>
+                <span class='mute'>12</span>
+              </li>
+              <li class='day'>13</li>
+              <li class='day'>14</li>
+              <li class='day'>15</li>
+              <li class='day'>16</li>
+              <li class='day'>17</li>
+              <li class='day now'>18</li>
+              <li class='day'>19</li>
+              <li class='day'><span class='mute2'>20</span></li>
+              <li class='day'>21</li>
+              <li class='day'>22</li>
+              <li class='day'>23</li>
+              <li class='day'>24</li>
+              <li class='day'>
+                <span class='mute'>25</span>
+              </li>
+              <li class='day'>
+                <span class='mute'>26</span>
+              </li>
+              <li class='day'>27</li>
+              <li class='day'>28</li>
+              <li class='day'>29</li>
+              <li class='day'>30</li>
+              <li class='day'></li>
+              <li class='day'>
+              </li>
+              <li class='day'>
+              </li>
+              <li class='day'></li>
+            </ul>
+          </div>
+          
+      </div>
+      </div>
+    </div>
+    <div class="column container is-fluid">
+      <div class="content">
+        <h1 class="title" style="font-size:3em">Quand ?</h1>
+        <p>Le <strong>18 Septembre 2021</strong>. C'est le week-end du Jeûne fédéral.</p>
+        <div>Nous célébrerons une cérémonie laïque à <strong>15h15</strong>, suivi d'un apéritif.</div>
+      </div>
+    </div>
+
+    <div class="column is-hidden-tablet" aria-hidden="true">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class='cal-container'>
+            <div class='today'>
+              <div class='date'></div>
+              <div class='day-week'>Samedi</div><div class='day-num'>18</div>
+            </div>
+
+            <div class='calendar'>
+              <div class='month'>
+              Septembre 2021
+              </div>
+              <ul class='weekdays'>
+                <li class='weekday'>L</li>
+                <li class='weekday'>M</li>
+                <li class='weekday'>M</li>
+                <li class='weekday'>J</li>
+                <li class='weekday'>V</li>
+                <li class='weekday'>S</li>
+                <li class='weekday'>S</li>
+              </ul>
+              <ul class='week'>
+                <li class='day'></li>
+                <li class='day'></li>
+                <li class='day'>1</li>
+                <li class='day'>2</li>
+                <li class='day'>3</li>
+                <li class='day'>
+                  <span class='mute'>4</span>
+                </li>
+                <li class='day'>
+                  <span class='mute'>5</span>
+                </li>
+                <li class='day'>6</li>
+                <li class='day'>7</li>
+                <li class='day'>8</li>
+                <li class='day'>9</li>
+                <li class='day'>10</li>
+                <li class='day'>
+                  <span class='mute'>11</span>
+                </li>
+                <li class='day'>
+                  <span class='mute'>12</span>
+                </li>
+                <li class='day'>13</li>
+                <li class='day'>14</li>
+                <li class='day'>15</li>
+                <li class='day'>16</li>
+                <li class='day'>17</li>
+                <li class='day now'>18</li>
+                <li class='day'>
+                  <span class='mute'>19</span>
+                </li>
+                <li class='day'>
+                  <span class='mute2'>20</span></li>
+                <li class='day'>21</li>
+                <li class='day'>22</li>
+                <li class='day'>23</li>
+                <li class='day'>24</li>
+                <li class='day'>
+                  <span class='mute'>25</span>
+                </li>
+                <li class='day'>
+                  <span class='mute'>26</span>
+                </li>
+                <li class='day'>27</li>
+                <li class='day'>28</li>
+                <li class='day'>29</li>
+                <li class='day'>30</li>
+                <li class='day'></li>
+                <li class='day'>
+                </li>
+                <li class='day'>
+                </li>
+                <li class='day'></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <section id="ou" class="columns is-vcentered" style="min-height:100vh">
+    <div class="column container is-fluid">
+      <div class="content">
+        <h1 class="title" style="font-size:4em">Où ?</h1>
+        <div>
+          <p>
+            Nous avons réservé le <a href="https://www.lacrausaz.ch/">Domaine de la Crausaz</a> au cœur des coteaux du Lavaux. 
+            Croyez-nous, c'est un chouette endroit.</p>
+            <h2>Accès</h2>
+          <blockquote>
+            Chemin de la Creuse 9, CH-1091 Grandvaux
+          </blockquote>
+          <p><strong>En transport en commun</strong>: Arrêt Grandvaux du bus 381, ou Arrêt Villette du S2. Prevoyez un peu de marche en pente.</p>
+          <p><strong>En voiture</strong>: des places de parcs sont généralement disponibles ici et là à Grandvaux. Si vous vous garez à Cully,  Un (très) chouette moyen de transport est organisé pour monter à la Crausaz à partir de Cully.  Rendez-vous à 14h00 (Église Catholique, Route de la Corniche 18, 1096 Cully). Un deuxième transport est organisé pour les retardataires à 14h30... mais ne soyez pas retardataire :-)</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="column">
+
+      <div id="mapid" style="width:500px; height: 500px"></div>
+      <!-- width="600" height="450" -->
+      <!-- <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1396.3535777714944!2d6.713595259771061!3d46.494005960985895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c28c8126a9f3f%3A0x51819cb17fa3f21f!2sChemin%20de%20la%20Creuse%209%2C%201091%20Grandvaux!5e0!3m2!1sen!2sch!4v1597498800704!5m2!1sen!2sch" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe> -->
+    </div>
+  </section>
+<!-- 
+  <section style="background:#eee">
+    <div class="column container is-fluid">
+      <div class="content">
+        <h1 class="title" style="font-size:4em">Programme</h1>
+        <h2>15h00</h2>
+        <p>Cérémonie laïque, diverses animations.</p>
+        <h2>16h00</h2>
+        <p>Photo de groupe.</p>
+        <h2>16h30</h2>
+        <p>Apéritif.</p>
+
+      </div>
+
+      </div>
+    
+  </section>   -->
+
+  <section id="autre" class="section" style="background: #eee">
+    <h1 class="title has-text-centered" style="font-size:3em"> Quelques détails logistique...</h1>
+    <div class="columns">
+      <div class="column">
+        <h2 class="title"><i class="fas fa-camera-retro"></i> Photographies</h2>
+        <div>Nous avons recruté les services d'<a href="https://www.anouk-photo.com/">Anouk Ruffieux</a> pour assurer la couverture photographique de notre mariage. Les photos seront publiés sur cette même page une fois celle-ci traitées. Amis photographes, prenez vos appareils si vous le voulez, mais il n'y a aucune obligation !</div>
+      </div>
+      <div class="column">
+        <h2 class="title"><i class="fas fa-user-tie"></i>Dress code</h2>
+        <div>Venez euh... bien habillés. Comme à un mariage, en fait. <em>Messieurs: si vous souhaitez mettre une chemise blanche, évitez le blanc "blanc" (ivoire ou blanc cassé c'est mieux !</em>). </div>
+      </div>
+      <div class="column">
+        <h2 class="title" style="font-family: sans-serif; font-variant-caps:all-small-caps"><i class="fas fa-virus"></i>COVID</h2>
+        <div>La cérémonie ayant lieu en extérieur, il ne devrait normalement pas avoir besoin de certificat. Nous vous aviserons en cas de changement. Nous vous recommandons cependant de faire un auto-test le jour même..</div>
+      </div>  
+    </div>
+  </section>
+  <section id="autre" class="section">
+    <h1 class="title has-text-centered" style="font-size:3em"> Liste de mariage</h1>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-three-fifths">
+        
+        <p>
+          Nous ne pouvons malheureusement pas vous prendre avec nous dans nos bagages lors de notre lune de miel que nous espérons passer en Namibie. Nous vous proposons donc de faire partie du voyage en participant symboliquement à notre périple à la mesure qui vous conviendra et en indiquant ce que vous souhaitez offrir ^_^
+        </p>
+        
+        <p>Nous allons mettre à disposition une cagnotte lors de la cérémonie. 
+          Alternativement, vous pouvez directement nous faire parvenir un versement aux coordonnées suivantes:
+        </p>
+      </div>
+      <div class="column"></div>
+    </div>
+    
+    <div class="columns mx-6">
+      <div class="column">
+        <ul>
+          <li> <input type="checkbox" /> 100km en avion, direction l’Afrique</li>
+          <li> <input type="checkbox" /> Un repas d’aéroport (il y a des McDo partout…)</li>
+          <li> <input type="checkbox" /> Un pied d’éléphant farci aux olives</li>
+          <li> <input type="checkbox" /> Une armure de fraicheur +5 contre les insolations</li>
+          <li> <input type="checkbox" /> Une balade au bord de l’océan atlantique</li>
+          <li> <input type="checkbox" /> Une deuxième roue de secours pour le 4x4 du safari</li>
+          <li> <input type="checkbox" /> Un bain avec un hippopoopopootame</li>
+        </ul>
+      </div>
+      <div class="column">
+        <ul>
+          <li> <input type="checkbox" /> Une course contre un guépard</li>
+          <li> <input type="checkbox" /> Un lever de soleil dans le désert</li>
+          <li> <input type="checkbox" /> Une bataille de girafes</li>
+          <li> <input type="checkbox" /> Un cocktail dans un lodge 5*</li>
+          <li> <input type="checkbox" /> Un combo objectif photo-gourdin</li>
+          <li> <input type="checkbox" /> Un coup de soleil carabiné (et son aloe vera)</li>
+          <li> <input type="checkbox" /> Une soirée sous les étoiles</li>
+          <li> <input type="checkbox" /> Une partie de sand surfing dans les dunes</li>
+          <li> <input type="checkbox" /> Un safari dans une mongolfière</li>
+        </ul>
+
+      </div>
+      <div class="column">
+        <ul>
+          <li> <input type="checkbox" /> Une léchouille de lionceau</li>
+          <li> <input type="checkbox" /> Une charge de rhinocéros (ratée bien sûr)</li>
+          <li> <input type="checkbox" /> Un selfie flou</li>
+          <li> <input type="checkbox" /> Une nuit dans une tente sur le toit de la voiture</li>
+          <li> <input type="checkbox" /> Du sable dans le caleçon</li>
+          <li> <input type="checkbox" /> Une blague embarrassante sur la lune de miel</li>
+          <li> <input type="checkbox" /> Un nid d’éléphant sur la route</li>
+          <li> <input type="checkbox" /> Anti-moustique n°5 de Chanel</li>
+        </ul>
+      </div>  
+    </div>
+
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-three-fifths">
+        <p>En pratique, nous allons mettre à disposition une cagnotte lors de la cérémonie. 
+          Alternativement, vous pouvez directement nous faire parvenir un versement aux coordonnées suivantes:
+        </p>
+      </div>
+      <div class="column"></div>
+    </div>
+
+
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column">
+
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">Bénéficiaire</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <textarea class="textarea is-small" type="text"  onclick="select()" readonly="readonly" rows="3">
+LETTRY SOPHIE ET PHAM HOANG MAC
+Route des Artisans 121
+1628 Vuadens</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">IBAN</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input is-small" type="text" value="CH09 00767 000K 5417 4374"  onclick="select()" readonly="readonly">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">Adresse bancaire</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <textarea class="textarea is-small" type="text"  onclick="select()" readonly="readonly" rows="3">
+Banque Cantonale Vaudoise
+Place St-François 14, CP 300
+1002 Lausanne</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">Clearing</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input is-small" type="text" value="767"  onclick="select()" readonly="readonly">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">SWIFT/BIC</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input is-small" type="text" value="BCVLCH2LXXX"  onclick="select()" readonly="readonly">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label">CCP</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input is-small" type="text" value="10-725-4"  onclick="select()" readonly="readonly">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column"></div>
+    </div>
+
+  </section>
+
+  <section class="section">
+    
+<section id="photo" class="section gal" style="background:#eee">
+
+  <div class="container is-fluid">
+    <h1 class="title has-text-centered" style="font-size:3em">Des images</h1>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column is-three-fifths">Pour patienter, voici quelques photoss et vidéo de notre cérémonie civile. Cliquez pour aggrandir !
+      </div>
+      <div class="column"></div>
+    </div>
+
+    <div class="columns">
+          <div class="column">
+              <img src="images/photo/1s.jpg" onclick="openModal();currentSlide(1)">
+              <img src="images/photo/5s.jpg" onclick="openModal();currentSlide(5)">
+              <img src="images/photo/9s.jpg" onclick="openModal();currentSlide(9)">
+              <img src="images/photo/13s.jpg" onclick="openModal();currentSlide(13)">
+          </div>
+          <div class="column">
+              <img src="images/photo/2s.jpg" onclick="openModal();currentSlide(2)">
+              <img src="images/photo/6s.jpg" onclick="openModal();currentSlide(6)">
+              <img src="images/photo/10s.jpg" onclick="openModal();currentSlide(10)">
+              <img src="images/photo/14s.jpg" onclick="openModal();currentSlide(14)">
+          </div>
+          <div class="column">
+              <img src="images/photo/3s.jpg" onclick="openModal();currentSlide(3)">
+              <img src="images/photo/7s.jpg" onclick="openModal();currentSlide(7)">
+              <img src="images/photo/11s.jpg" onclick="openModal();currentSlide(11)">
+          </div>
+          <div class="column">
+            <img src="images/photo/4s.jpg" onclick="openModal();currentSlide(4)">
+            <img src="images/photo/8s.jpg" onclick="openModal();currentSlide(8)">
+            <img src="images/photo/12s.jpg" onclick="openModal();currentSlide(12)">
+        </div>
+    </div>
+
+      <div class="modal" id="myModal">
+          <div class="modal-content is-vcentered">
+            <div class="item-slide">
+              <img src="images/photo/1.jpg" onclick="openModal();currentSlide(1)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/2.jpg" onclick="openModal();currentSlide(2)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/3.jpg" onclick="openModal();currentSlide(3)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/4.jpg" onclick="openModal();currentSlide(4)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/5.jpg" onclick="openModal();currentSlide(5)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/6.jpg" onclick="openModal();currentSlide(6)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/7.jpg" onclick="openModal();currentSlide(7)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/8.jpg" onclick="openModal();currentSlide(8)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/9.jpg" onclick="openModal();currentSlide(9)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/10.jpg" onclick="openModal();currentSlide(10)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/11.jpg" onclick="openModal();currentSlide(11)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/12.jpg" onclick="openModal();currentSlide(12)">
+            </div>
+            <div class="item-slide">
+              <img src="images/photo/13.jpg" onclick="openModal();currentSlide(13)">
+            </div>
+            <div class="item-slide">
+                <video
+                  id="my-video"
+                  class="video-js"
+                  controls
+                  preload="auto"
+                  width="800"
+                  height="600"
+                  poster="https://image.mux.com/Cgq00K029mjWlvrgntFxza01nd8q3M1frlvtEj00oNdEjww/thumbnail.png?width=1920&height=1080&fit_mode=pad"
+                  data-setup="{}"
+              >
+                <p class="vjs-no-js">
+                  Activez le javascript pour voir la vidéo.                  >
+                </p>
+              </video>
+              <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+          
+              </div>
+          </div>
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <button onclick="closeModal()" class="modal-close is-large" aria-label="close"></button>
+      </div>
+  </div>
+</section>
+  </section>
+  <script>
+    var options = {};
+    var player = videojs('my-video',options);
+player.src({
+  src: 'https://stream.mux.com/Cgq00K029mjWlvrgntFxza01nd8q3M1frlvtEj00oNdEjww.m3u8',
+  type: 'application/x-mpegURL'
+});
+
+    </script>
+  <script>
+    function openModal() {
+      document.getElementById('myModal').style.display = "block";
+    }
+    
+    function closeModal() {
+      document.getElementById('myModal').style.display = "none";
+    }
+    
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("item-slide");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      slides[slideIndex-1].style.display = "block";
+    }
+  </script>
+
+  <!-- <section class="section">
+  <a id="formulaire-reponse"></a>
+    <div class="content">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScm5AiEmmvIq-2JWlcOjqgZz3PBFUmzhmC_9yd8mO1RHtqK-A/viewform?embedded=true" height="1082" frameborder="0" marginheight="0" marginwidth="0" style="width:100%">Loading…</iframe>
+    </div>
+  </section> -->
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        C'est la fin de la page, bisous ❤️.
+      </p>
+      <p> <small> Créé avec les patounes de Hoang 🐲, l'œil avisé de Sophie 🦊, les ronrons de Pocari 🐈 , la course de Twix (RIP) et Yuzu 🐿️, et les ouaf-ouafs de Kahlua 🐕.</small></p>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    const map = L.map('mapid').setView([46.49404, 6.71419], 14);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 0,
+        maxZoom: 20,
+        attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    let crausaz = new L.marker([46.49404, 6.71419]);
+    let eglise = new L.marker([46.49072, 6.73035]);
+
+    const leafletMarkers = L.layerGroup([
+    crausaz,
+        eglise,
+    ]);
+    leafletMarkers.addTo(map);
+    crausaz.bindTooltip("<strong>Domaine de la Crausaz</strong><br />Chemin de la Creuse 9<br /> 1091 Grandvaux ").openTooltip();
+    eglise.bindTooltip("<strong>Lieu de rendez-vous pour monter</strong><br />Rte de la Corniche 18 (église catholique)<br /> 1096 Cully ").openTooltip();
+    
+  </script>
+
+  </body>
+</html>
